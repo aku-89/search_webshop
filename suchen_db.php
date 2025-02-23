@@ -1,11 +1,12 @@
 <?php
 
 //mysqli-connection is provided by login_db.php
-function suchen_db($mysqli, $keyword){
+function suchen_db($mysqli, $keyword, $kategorie, $reihenfolge){
     if(!empty($keyword)){
         // echo  "$keyword";
         
-        $result = $mysqli->query("Select distinct name, preis from tierfutter where name like '%$keyword%' order by preis desc");
+        //$result = $mysqli->query("Select distinct name, preis from tierfutter where name like '%$keyword%' order by preis desc");
+        $result = $mysqli->query("Select distinct name, preis from tierfutter where name like '%$keyword%' and produktkategorie = '$kategorie' order by preis $reihenfolge");
 
         if(mysqli_num_rows($result)==0){
             echo "</br>"."Es wrude leider nichts Passendes zu deiner Suche gefunden!";
